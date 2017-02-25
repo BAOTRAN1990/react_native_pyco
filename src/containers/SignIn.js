@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -23,12 +23,25 @@ export default class SignIn extends Component {
       password: ''
     };
     this.handleSignIn = this.handleSignIn.bind(this);
+    this.onForwardHandler = this.onForwardHandler.bind(this);
+  }
+
+  static propTypes = {
+    navigator: PropTypes.object.isRequired
   }
 
   handleSignIn(){
     Alert.alert(
       'Account info',
       `Username: ${this.state.userName} - Password: ${this.state.password}`);
+  }
+
+  onForwardHandler(){
+    this.props.navigator.push({
+      id: 'signUp',
+      title: 'Sign Up Screen',
+      index: 1
+    });
   }
 
   render() {
@@ -65,7 +78,7 @@ export default class SignIn extends Component {
               </View>
               <View style={styles.sign_up_container}>
                 <Text style={{backgroundColor: 'transparent'}}>Don't have an account?  </Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this.onForwardHandler}>
                   <Text style={{fontSize: 18, color: WHITE_COLOR, backgroundColor: 'transparent'}}>Sign Up</Text>
                 </TouchableOpacity>
               </View>

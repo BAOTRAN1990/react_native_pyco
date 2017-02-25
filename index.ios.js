@@ -6,15 +6,27 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry
+  AppRegistry,
+  Navigator
 } from 'react-native';
 
 import SignIn from 'containers/SignIn'
+import SignUp from 'containers/SignUp'
 
 export default class practice1 extends Component {
+  renderScreen(route, navigator){
+    if(route.id === 'signUp'){
+      return <SignUp navigator={navigator}/>;
+    }
+    return <SignIn navigator={navigator}/>;
+  }
+
   render() {
     return (
-          <SignIn/>
+          <Navigator
+            initialRoute={{id: 'signIn', title: 'Sign in screen', index: 0}}
+            renderScene={this.renderScreen}
+          />
     );
   }
 }
