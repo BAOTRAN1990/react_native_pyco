@@ -12,6 +12,7 @@ import {
 
 import CircleImageComponent from 'components/CircleImage'
 import InputFieldComponent from 'components/CustomInputField'
+import listOfScreen from 'navigation/ListOfScreens'
 
 const WHITE_COLOR = '#FFFFFF';
 
@@ -37,11 +38,7 @@ export default class SignIn extends Component {
   }
 
   onForwardHandler(){
-    this.props.navigator.push({
-      id: 'signUp',
-      title: 'Sign Up Screen',
-      index: 1
-    });
+    this.props.navigator.push(listOfScreen[1]);
   }
 
   render() {
