@@ -22,7 +22,7 @@ export default class SignUp extends Component {
       birthday: ''
     };
     this.backToSignInHandler = this.backToSignInHandler.bind(this);
-    //this.onForwardHandler = this.onForwardHandler.bind(this);
+    this.joinHandler = this.joinHandler.bind(this);
   }
 
   static propTypes = {
@@ -31,6 +31,13 @@ export default class SignUp extends Component {
 
   backToSignInHandler(){
     this.props.navigator.pop();
+  }
+
+  joinHandler(){
+    Alert.alert(
+      'New account info',
+      `Username: ${this.state.userName} - Password: ${this.state.password}
+       Email: ${this.state.email} - Birthday: ${this.state.birthday}`);
   }
 
   render() {
@@ -69,7 +76,7 @@ export default class SignUp extends Component {
           </View>
           <View style={styles.bottom_container}>
             <View style={styles.join_button_container}>
-              <TouchableOpacity style={styles.join_button} onPress={this.handleJoin}>
+              <TouchableOpacity style={styles.join_button} onPress={this.joinHandler}>
                 <Text style={{fontSize: 20, color: constVar.colors.WHITE }}>Join</Text>
               </TouchableOpacity>
             </View>
