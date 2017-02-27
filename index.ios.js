@@ -28,7 +28,7 @@ export default class practice1 extends Component {
       return null;
     } else{
       return (
-        <TouchableHighlight onPress={() => navigator.pop({navigationBarHidden: false})}>
+        <TouchableHighlight onPress={() => navigator.pop()}>
           <Image source={require('assets/images/back.png')}/>
         </TouchableHighlight>
       );

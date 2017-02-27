@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
@@ -12,9 +11,7 @@ import {
 
 import CircleImageComponent from 'components/CircleImage'
 import InputFieldComponent from 'components/CustomInputField'
-import listOfScreen from 'navigation/ListOfScreens'
-
-const WHITE_COLOR = '#FFFFFF';
+import constVar from 'const/constant'
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -38,7 +35,7 @@ export default class SignIn extends Component {
   }
 
   onForwardHandler(){
-    this.props.navigator.push(listOfScreen[1]);
+    this.props.navigator.push(constVar.routes[1]);
   }
 
   render() {
@@ -49,16 +46,16 @@ export default class SignIn extends Component {
             </View>
             <View style={styles.input_fields_container}>
               <InputFieldComponent 
-                placeholder='User name' 
-                imageIcon={require('assets/images/user_name.png')} 
-                secureTextEntry={false} placeholderTextColor={WHITE_COLOR}
+                placeholder='User name'
+                imageIcon={require('assets/images/user_name.png')}
+                secureTextEntry={false} placeholderTextColor={constVar.colors.WHITE}
                 onChangeText={(userName) => this.setState({userName})}  
               />
               <InputFieldComponent 
                 placeholder='Password' 
                 imageIcon={require('assets/images/password.png')} 
                 secureTextEntry={true}
-                placeholderTextColor={WHITE_COLOR} 
+                placeholderTextColor={constVar.colors.WHITE} 
                 onChangeText={(password) => this.setState({password})} 
               />
               <View style={styles.forgot_password_container}>
@@ -70,13 +67,13 @@ export default class SignIn extends Component {
             <View style={styles.bottom_container}>
               <View style={styles.sign_in_button_container}>
                 <TouchableOpacity style={styles.sign_in_button} onPress={this.handleSignIn}>
-                  <Text style={{fontSize: 20, color: WHITE_COLOR }}>Sign In</Text>
+                  <Text style={{fontSize: 20, color: constVar.colors.WHITE }}>Sign In</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.sign_up_container}>
                 <Text style={{backgroundColor: 'transparent'}}>Don't have an account?  </Text>
                 <TouchableOpacity onPress={this.onForwardHandler}>
-                  <Text style={{fontSize: 18, color: WHITE_COLOR, backgroundColor: 'transparent'}}>Sign Up</Text>
+                  <Text style={{fontSize: 18, color: constVar.colors.WHITE, backgroundColor: 'transparent'}}>Sign Up</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -121,6 +118,6 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ff3366'
+    backgroundColor: constVar.colors.PINK
   }
 });

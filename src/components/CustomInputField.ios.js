@@ -6,6 +6,8 @@ import {
   Image
 } from 'react-native';
 
+import constVar from 'const/constant';
+
 export default class InputFieldComponent extends Component {
   render() {
     return (
@@ -31,9 +33,11 @@ const styles = StyleSheet.create({
   container: {
     //flex: 1,
     flexDirection: 'row',
-    height: 30,
+    height: 50,
+    alignItems: 'center',
     marginTop: 10,
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    borderBottomColor: constVar.colors.GRAY
   },
   image: {
     flex: 1,
@@ -41,6 +45,6 @@ const styles = StyleSheet.create({
   },
   inputField: {
     flex: 5,
-    height: 20
+    height: 50
   }
 });
