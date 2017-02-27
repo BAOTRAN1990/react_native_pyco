@@ -34,17 +34,18 @@ const styles = StyleSheet.create({
   container: {
     //flex: 1,
     flexDirection: 'row',
-    height: 40,
+    height: 50,
+    alignItems: 'center',
     marginTop: 10,
     borderBottomWidth: 1,
     borderBottomColor: constVar.colors.GRAY
   },
   image: {
     flex: 1,
-    height: 30,
+    height: 20,
   },
   inputField: {
     flex: 5,
-    height: 40
+    height: 50
   }
 });

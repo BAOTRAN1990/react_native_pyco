@@ -16,14 +16,14 @@ import SignIn from 'containers/SignIn'
 import SignUp from 'containers/SignUp'
 
 export default class practice1 extends Component {
-  renderScreen(route, navigator){
+  renderScreen(route, navigator) {
     if(route.id === 'signUp'){
       return <SignUp navigator={navigator}/>;
     }
     return <SignIn navigator={navigator}/>;
   }
 
-  leftButtonHandler(route, navigator, index, navState){
+  leftButtonHandler(route, navigator, index, navState) {
     if(route.index === 0){
       return null;
     } else{
@@ -35,11 +35,16 @@ export default class practice1 extends Component {
     }
   }
 
+  transitionNavigationHandler(route, routeStack) {
+    return Navigator.SceneConfigs.FloatFromBottom;
+  }
+
   render() {
     return (
           <Navigator
             initialRoute={{id: 'signIn', title: 'Sign in screen', index: 0}}
             renderScene={this.renderScreen}
+            configureScene={this.transitionNavigationHandler}
             navigationBar={
               <Navigator.NavigationBar
                 routeMapper={{

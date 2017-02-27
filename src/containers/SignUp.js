@@ -64,7 +64,7 @@ export default class SignUp extends Component {
             <InputFieldComponent 
                 placeholder='Password'
                 imageIcon={require('assets/images/password.png')}
-                secureTextEntry={false} placeholderTextColor={constVar.colors.WHITE}
+                secureTextEntry={true} placeholderTextColor={constVar.colors.WHITE}
                 onChangeText={(password) => this.setState({password})}  
             />
             <InputFieldComponent 
