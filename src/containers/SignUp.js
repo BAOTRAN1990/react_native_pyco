@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import InputFieldComponent from 'components/CustomInputField'
 import constVar from 'const/constant'
@@ -26,11 +27,12 @@ export default class SignUp extends Component {
   }
 
   static propTypes = {
-    navigator: PropTypes.object.isRequired
+    //navigator: PropTypes.object.isRequired
   }
 
   backToSignInHandler(){
-    this.props.navigator.pop();
+    Actions.pop();
+    //Actions.refresh(PARAMS);
   }
 
   joinHandler(){
@@ -105,7 +107,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     color: constVar.colors.WHITE,
-    paddingLeft: 20
+    paddingLeft: 20,
+    backgroundColor: 'transparent'
   },
   form_container: {
     flex: 4

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import CircleImageComponent from 'components/CircleImage'
 import InputFieldComponent from 'components/CustomInputField'
@@ -21,21 +22,17 @@ export default class SignIn extends Component {
       password: ''
     };
     this.handleSignIn = this.handleSignIn.bind(this);
-    this.onForwardHandler = this.onForwardHandler.bind(this);
+    //this.onForwardHandler = this.onForwardHandler.bind(this);
   }
 
   static propTypes = {
-    navigator: PropTypes.object.isRequired
+    //navigator: PropTypes.object.isRequired
   }
 
   handleSignIn(){
     Alert.alert(
       'Account info',
       `Username: ${this.state.userName} - Password: ${this.state.password}`);
-  }
-
-  onForwardHandler(){
-    this.props.navigator.push(constVar.routes[1]);
   }
 
   render() {
@@ -72,7 +69,7 @@ export default class SignIn extends Component {
               </View>
               <View style={styles.sign_up_container}>
                 <Text style={{backgroundColor: 'transparent'}}>Don't have an account?  </Text>
-                <TouchableOpacity onPress={this.onForwardHandler}>
+                <TouchableOpacity onPress={Actions.signUp}>
                   <Text style={{fontSize: 18, color: constVar.colors.WHITE, backgroundColor: 'transparent'}}>Sign Up</Text>
                 </TouchableOpacity>
               </View>
