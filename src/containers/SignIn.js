@@ -9,12 +9,14 @@ import {
   Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import CircleImageComponent from 'components/CircleImage'
 import InputFieldComponent from 'components/CustomInputField'
 import constVar from 'const/constant'
+import loginBLogic from 'redux_manager/signin_blogic'
 
-export default class SignIn extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,17 +24,10 @@ export default class SignIn extends Component {
       password: ''
     };
     this.handleSignIn = this.handleSignIn.bind(this);
-    //this.onForwardHandler = this.onForwardHandler.bind(this);
-  }
-
-  static propTypes = {
-    //navigator: PropTypes.object.isRequired
   }
 
   handleSignIn(){
-    Alert.alert(
-      'Account info',
-      `Username: ${this.state.userName} - Password: ${this.state.password}`);
+    this.props.login({username: this.state.userName, password: this.state.password});
   }
 
   render() {
@@ -62,6 +57,9 @@ export default class SignIn extends Component {
               </View>
             </View>
             <View style={styles.bottom_container}>
+              <View style={styles.error_container}>
+                <Text style={{backgroundColor: 'transparent', color: 'red'}}>{this.props.errorMsg}</Text>
+              </View>
               <View style={styles.sign_in_button_container}>
                 <TouchableOpacity style={styles.sign_in_button} onPress={this.handleSignIn}>
                   <Text style={{fontSize: 20, color: constVar.colors.WHITE }}>Sign In</Text>
@@ -100,6 +98,10 @@ const styles = StyleSheet.create({
   bottom_container: {
     flex: 1
   },
+  error_container: {
+    flex: 1,
+    alignItems: 'center'
+  },
   sign_in_button_container: {
     flex: 1,
     flexDirection: 'row'
@@ -118,3 +120,20 @@ const styles = StyleSheet.create({
     backgroundColor: constVar.colors.PINK
   }
 });
+
+const mapStateToProps = (state) => {
+  return {
+    errorMsg: state.LogInReducer.error,
+    userInfo: state.LogInReducer.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (userCredentials) => {
+      dispatch(loginBLogic(userCredentials))
+    }
+  }
+}
+
+export default SignInScreen = connect(mapStateToProps, mapDispatchToProps)(SignIn);
