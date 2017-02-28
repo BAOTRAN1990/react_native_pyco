@@ -1,3 +1,4 @@
 {
-"presets": ["react-native"]
+  "plugins": ["transform-react-jsx", "transform-object-rest-spread"],
+  "presets": ["es2015", "react-native"]
 }
