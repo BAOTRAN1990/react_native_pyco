@@ -23,9 +23,10 @@ export function logInRequestSuccessAsync(data){
     return dispatch => {
         setTimeout(() => {
             // Yay! Can invoke sync or async actions with `dispatch`
+            //Actions.signUp();
             dispatch(logInRequestSuccess(data));
-            Actions.signUp();
-        }, 5000);
+            Actions.listUser();
+        }, 1000);
     }
 }
 
