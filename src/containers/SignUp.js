@@ -33,7 +33,6 @@ class SignUp extends Component {
 
   backToSignInHandler(){
     Actions.pop();
-    //Actions.refresh(PARAMS);
   }
 
   joinHandler(){
@@ -44,12 +43,6 @@ class SignUp extends Component {
   }
 
   render() {
-    if(this.props.userInfo) {
-      //Actions.signUp(this.props.userInfo.full_name);
-      Alert.alert('Welcome notice from sign up scene', `Welcome ${this.props.userInfo.full_name}`);
-    } else {
-      Alert.alert('Welcome notice from sign up scene', `Welcome anonymous`);
-    }
     return (
         <Image source={require('assets/images/bg_signin.png')} style={styles.bg_image} resizeMode={Image.resizeMode.cover}>
           <View style={styles.title_container}>
