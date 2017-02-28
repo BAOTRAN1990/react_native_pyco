@@ -1,4 +1,4 @@
-import {logInRequestSuccess, logInRequestFailed} from './signin_action_creator'
+import {logInRequestSuccess, logInRequestFailed, logInRequestSuccessAsync} from './signin_action_creator'
 import {
   StyleSheet,
   Text,
@@ -19,9 +19,8 @@ const userInfo = {
 };
 
 export default function login(userCredentials) {
-	if (userCredentials.username === 'Test' && userCredentials.password === '123456') {
-        Alert.alert('Welcome notice', `Welcome ${userInfo.full_name}`);
-		return logInRequestSuccess(userInfo);
+	if (userCredentials.username === 'Test' && userCredentials.password === '123') {
+		return logInRequestSuccessAsync(userInfo);
 	} else {
 		return logInRequestFailed({message: 'Invalid user.'});
 	}

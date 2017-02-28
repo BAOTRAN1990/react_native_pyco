@@ -1,3 +1,5 @@
+import { Actions } from 'react-native-router-flux';
+
 // Action types
 export const REQUEST = 'Request';
 export const SUCCESS = 'Success';
@@ -14,6 +16,16 @@ export function logInRequestSuccess(data){
     return {
         type: SUCCESS,
         payload: data
+    }
+}
+
+export function logInRequestSuccessAsync(data){
+    return dispatch => {
+        setTimeout(() => {
+            // Yay! Can invoke sync or async actions with `dispatch`
+            dispatch(logInRequestSuccess(data));
+            Actions.signUp();
+        }, 5000);
     }
 }
 

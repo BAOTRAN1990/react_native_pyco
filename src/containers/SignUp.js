@@ -9,11 +9,12 @@ import {
   Alert
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import InputFieldComponent from 'components/CustomInputField'
 import constVar from 'const/constant'
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,6 +44,10 @@ export default class SignUp extends Component {
   }
 
   render() {
+    if(this.props.userInfo) {
+      //Actions.signUp(this.props.userInfo.full_name);
+      Alert.alert('Welcome notice from sign up scene', `Welcome ${this.props.userInfo.full_name}`);
+    }
     return (
         <Image source={require('assets/images/bg_signin.png')} style={styles.bg_image} resizeMode={Image.resizeMode.cover}>
           <View style={styles.title_container}>
@@ -134,3 +139,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+const mapStateToProps = (state) => {
+  return {
+    //errorMsg: state.LogInReducer.error,
+    userInfo: state.LogInReducer.user
+  }
+}
+
+export default SignUpScreen = connect(mapStateToProps)(SignUp);
