@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer';
 
 import constVar from 'src/const/constant';
 
-it('Test custom input field', (done) => {
+it('Test name input field', (done) => {
   const component = renderer.create(
     <InputFieldComponent 
         placeholder='User name'

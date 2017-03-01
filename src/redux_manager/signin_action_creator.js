@@ -5,6 +5,15 @@ export const REQUEST = 'Request';
 export const SUCCESS = 'Success';
 export const FAILED = 'Failed';
 
+// sample user info
+const userInfo = {
+	trainee_id: 1,
+	full_name: 'test',
+	email: 'test@gmail.com',
+	birthday: '1986-01-20',
+	token: 'abcxyzwendsjkfjdsklfjkds'
+};
+
 // Action Creators
 export function logInRequest(){
     return {
@@ -19,14 +28,20 @@ export function logInRequestSuccess(data){
     }
 }
 
-export function logInRequestSuccessAsync(data){
+export default function logInAsync(userCredentials){
     return dispatch => {
-        setTimeout(() => {
-            // Yay! Can invoke sync or async actions with `dispatch`
-            //Actions.signUp();
-            dispatch(logInRequestSuccess(data));
-            Actions.listUser();
-        }, 1000);
+        dispatch(logInRequest());
+        if (userCredentials.username === 'Test' && userCredentials.password === '123') {
+            setTimeout(() => {
+                dispatch(logInRequestSuccess(userInfo));
+                Actions.listUser();
+            }, 2000);
+        } else {
+            setTimeout(() => {
+                dispatch(logInRequestFailed({message: 'Invalid user.'}));
+            }, 2000);
+        }
+        
     }
 }
 
