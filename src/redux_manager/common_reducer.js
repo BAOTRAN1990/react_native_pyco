@@ -6,12 +6,12 @@ export default (state = {}, action) => {
     switch (action.type){
         case START_LOADING:
             return {
-                //...state,
+                ...state,
                 loading: true
             };
         case STOP_LOADING:
             return {
-                //...state,
+                ...state,
                 loading: false
             };
         default:
