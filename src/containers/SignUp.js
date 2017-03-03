@@ -12,6 +12,7 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
 import InputFieldComponent from 'components/CustomInputField'
+import addUser from 'redux_manager/user_action_creator'
 import constVar from 'const/constant'
 
 class SignUp extends Component {
@@ -36,10 +37,16 @@ class SignUp extends Component {
   }
 
   joinHandler(){
-    Alert.alert(
-      'New account info',
-      `Username: ${this.state.userName} - Password: ${this.state.password}
-       Email: ${this.state.email} - Birthday: ${this.state.birthday}`);
+    // Alert.alert(
+    //   'New account info',
+    //   `Username: ${this.state.userName} - Password: ${this.state.password}
+    //    Email: ${this.state.email} - Birthday: ${this.state.birthday}`);
+    let newUser = {};
+    newUser.userName = this.state.userName;
+    newUser.password = this.state.password;
+    newUser.email = this.state.email;
+    newUser.birthday = this.state.birthday;
+    this.props.addUser(newUser);
   }
 
   render() {
@@ -137,11 +144,19 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    //errorMsg: state.LogInReducer.error,
-    userInfo: state.LogInReducer.user
+    //userInfo: state.UserReducer.userList,
+    loading: state.CommonReducer.loading
   }
 }
 
-const SignUpScreen = connect(mapStateToProps)(SignUp);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addUser: (userInfo) => {
+      dispatch(addUser(userInfo))
+    }
+  }
+}
+
+const SignUpScreen = connect(mapStateToProps, mapDispatchToProps)(SignUp);
 
 export default SignUpScreen;
