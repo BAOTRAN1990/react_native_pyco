@@ -13,7 +13,9 @@ export default class InputFieldComponent extends Component {
     return (
         <View style={styles.container}>
           <Image source={this.props.imageIcon} style={styles.image} resizeMode={Image.resizeMode.contain}/>
-          <TextInput 
+          <TextInput
+          autoCapitalize='none'
+          autoCorrect={false}
           {...this.props}
           style={styles.inputField}
           />

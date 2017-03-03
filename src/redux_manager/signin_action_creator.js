@@ -31,14 +31,14 @@ export function logInRequestSuccess(data){
 export default function logInAsync(userCredentials){
     return dispatch => {
         dispatch(logInRequest());
-        if (userCredentials.username === 'Test' && userCredentials.password === '123') {
+        if (userCredentials.username === 'test' && userCredentials.password === '123') {
             setTimeout(() => {
                 dispatch(logInRequestSuccess(userInfo));
                 Actions.listUser();
             }, 2000);
         } else {
             setTimeout(() => {
-                dispatch(logInRequestFailed({message: 'Invalid user.'}));
+                dispatch(logInRequestFailed({message: 'Invalid username and password.'}));
             }, 2000);
         }
         
