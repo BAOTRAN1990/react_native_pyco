@@ -142,4 +142,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default SignUpScreen = connect(mapStateToProps)(SignUp);
+const SignUpScreen = connect(mapStateToProps)(SignUp);
+
+export default SignUpScreen;
