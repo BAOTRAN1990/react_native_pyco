@@ -41,7 +41,6 @@ export default function logInAsync(userCredentials){
                 dispatch(logInRequestFailed({message: 'Invalid username and password.'}));
             }, 2000);
         }
-        
     }
 }
 
