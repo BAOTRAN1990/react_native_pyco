@@ -6,7 +6,8 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity,
-  Alert
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -50,6 +51,19 @@ class SignUp extends Component {
   }
 
   render() {
+    let dynaJoinButton;
+    if (this.props.loading){
+      dynaJoinButton = <ActivityIndicator
+                            animating={this.props.loading}
+                            color={constVar.colors.WHITE}
+                            size="large"
+                          />;
+    } else {
+      dynaJoinButton = (<TouchableOpacity style={styles.join_button} onPress={this.joinHandler}>
+                          <Text style={{fontSize: 20, color: constVar.colors.WHITE }}>Join</Text>
+                        </TouchableOpacity>);
+    }
+
     return (
         <Image source={require('assets/images/bg_signin.png')} style={styles.bg_image} resizeMode={Image.resizeMode.cover}>
           <View style={styles.title_container}>
@@ -85,9 +99,7 @@ class SignUp extends Component {
           </View>
           <View style={styles.bottom_container}>
             <View style={styles.join_button_container}>
-              <TouchableOpacity style={styles.join_button} onPress={this.joinHandler}>
-                <Text style={{fontSize: 20, color: constVar.colors.WHITE }}>Join</Text>
-              </TouchableOpacity>
+              {dynaJoinButton}
             </View>
             <View style={styles.sign_in_container}>
               <Text style={{backgroundColor: 'transparent'}}>Already have an account?  </Text>
@@ -125,7 +137,8 @@ const styles = StyleSheet.create({
   },
   join_button_container: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   join_button: {
     flex: 1,
