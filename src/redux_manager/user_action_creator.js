@@ -19,7 +19,7 @@ export default function addUserAsync(userInfo){
         setTimeout(() => {
             dispatch(addUser(userInfo));
             dispatch(stopLoading());
-            //Actions.listUser();
+            Actions.listUser();
         }, 2000);
     };
 }
