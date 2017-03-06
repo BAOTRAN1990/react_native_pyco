@@ -4,11 +4,12 @@ import thunk from 'redux-thunk';
 import devTools from 'remote-redux-devtools';
 
 import rootReducer from './rootReducer';
+import logger from 'middlewares/Logger'
 
 let store;
 if(__DEV__){
     const enhancer = compose(
-        applyMiddleware(thunk),
+        applyMiddleware(logger, thunk),
         devTools({
             name: Platform.OS,
             hostname: 'localhost',
@@ -17,7 +18,7 @@ if(__DEV__){
     );
     store = createStore(rootReducer, enhancer);
 } else {
-    store = createStore(rootReducer, applyMiddleware(thunk));
+    store = createStore(rootReducer, applyMiddleware(logger, thunk));
 }
 
 export default store;

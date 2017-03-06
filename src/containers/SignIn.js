@@ -138,7 +138,7 @@ const mapStateToProps = (state) => {
   return {
     errorMsg: state.LogInReducer.error,
     userInfo: state.LogInReducer.user,
-    loading: state.LogInReducer.loading
+    loading: state.CommonReducer.loading
   }
 }
 

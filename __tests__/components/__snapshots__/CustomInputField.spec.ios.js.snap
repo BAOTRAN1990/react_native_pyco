@@ -24,6 +24,8 @@ exports[`Test name input field 1`] = `
     }
   />
   <TextInput
+    autoCapitalize="none"
+    autoCorrect={false}
     imageIcon={1}
     onChangeText={[Function]}
     placeholder="User name"

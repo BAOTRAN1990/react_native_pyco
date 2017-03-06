@@ -1,7 +1,8 @@
 import { Actions } from 'react-native-router-flux';
 
+import {startLoading, stopLoading} from 'redux_manager/common_action_creator';
+
 // Action types
-export const REQUEST = 'Request';
 export const SUCCESS = 'Success';
 export const FAILED = 'Failed';
 
@@ -15,12 +16,6 @@ const userInfo = {
 };
 
 // Action Creators
-export function logInRequest(){
-    return {
-        type: REQUEST
-    }
-}
-
 export function logInRequestSuccess(data){
     return {
         type: SUCCESS,
@@ -30,15 +25,17 @@ export function logInRequestSuccess(data){
 
 export default function logInAsync(userCredentials){
     return dispatch => {
-        dispatch(logInRequest());
+        dispatch(startLoading());
         if (userCredentials.username === 'test' && userCredentials.password === '123') {
             setTimeout(() => {
                 dispatch(logInRequestSuccess(userInfo));
+                dispatch(stopLoading());
                 Actions.listUser();
             }, 2000);
         } else {
             setTimeout(() => {
                 dispatch(logInRequestFailed({message: 'Invalid username and password.'}));
+                dispatch(stopLoading());
             }, 2000);
         }
     }

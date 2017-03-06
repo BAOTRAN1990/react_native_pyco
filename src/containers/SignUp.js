@@ -6,12 +6,14 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity,
-  Alert
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
 import InputFieldComponent from 'components/CustomInputField'
+import addUser from 'redux_manager/user_action_creator'
 import constVar from 'const/constant'
 
 class SignUp extends Component {
@@ -36,13 +38,32 @@ class SignUp extends Component {
   }
 
   joinHandler(){
-    Alert.alert(
-      'New account info',
-      `Username: ${this.state.userName} - Password: ${this.state.password}
-       Email: ${this.state.email} - Birthday: ${this.state.birthday}`);
+    // Alert.alert(
+    //   'New account info',
+    //   `Username: ${this.state.userName} - Password: ${this.state.password}
+    //    Email: ${this.state.email} - Birthday: ${this.state.birthday}`);
+    let newUser = {};
+    newUser.userName = this.state.userName;
+    newUser.password = this.state.password;
+    newUser.email = this.state.email;
+    newUser.birthday = this.state.birthday;
+    this.props.addUser(newUser);
   }
 
   render() {
+    let dynaJoinButton;
+    if (this.props.loading){
+      dynaJoinButton = <ActivityIndicator
+                            animating={this.props.loading}
+                            color={constVar.colors.WHITE}
+                            size="large"
+                          />;
+    } else {
+      dynaJoinButton = (<TouchableOpacity style={styles.join_button} onPress={this.joinHandler}>
+                          <Text style={{fontSize: 20, color: constVar.colors.WHITE }}>Join</Text>
+                        </TouchableOpacity>);
+    }
+
     return (
         <Image source={require('assets/images/bg_signin.png')} style={styles.bg_image} resizeMode={Image.resizeMode.cover}>
           <View style={styles.title_container}>
@@ -78,9 +99,7 @@ class SignUp extends Component {
           </View>
           <View style={styles.bottom_container}>
             <View style={styles.join_button_container}>
-              <TouchableOpacity style={styles.join_button} onPress={this.joinHandler}>
-                <Text style={{fontSize: 20, color: constVar.colors.WHITE }}>Join</Text>
-              </TouchableOpacity>
+              {dynaJoinButton}
             </View>
             <View style={styles.sign_in_container}>
               <Text style={{backgroundColor: 'transparent'}}>Already have an account?  </Text>
@@ -118,7 +137,8 @@ const styles = StyleSheet.create({
   },
   join_button_container: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   join_button: {
     flex: 1,
@@ -137,9 +157,19 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    //errorMsg: state.LogInReducer.error,
-    userInfo: state.LogInReducer.user
+    //userInfo: state.UserReducer.userList,
+    loading: state.CommonReducer.loading
   }
 }
 
-export default SignUpScreen = connect(mapStateToProps)(SignUp);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addUser: (userInfo) => {
+      dispatch(addUser(userInfo))
+    }
+  }
+}
+
+const SignUpScreen = connect(mapStateToProps, mapDispatchToProps)(SignUp);
+
+export default SignUpScreen;
