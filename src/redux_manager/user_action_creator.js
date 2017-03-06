@@ -1,3 +1,7 @@
+import {
+  Alert
+} from 'react-native';
+
 import { Actions } from 'react-native-router-flux';
 
 import {startLoading, stopLoading} from 'redux_manager/common_action_creator';
@@ -26,7 +30,13 @@ export default function addUserAsync(userInfo){
         setTimeout(() => {
             dispatch(addUser(userInfo));
             dispatch(stopLoading());
-            Actions.listUser();
+            Alert.alert(
+                'Message',
+                'Signed up successfully!!! Please sign in again.',
+                [
+                    {text: 'OK', onPress: () => Actions.signIn()},
+                ]
+            );
         }, 2000);
     };
 }
