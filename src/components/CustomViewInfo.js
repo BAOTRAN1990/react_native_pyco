@@ -1,33 +1,29 @@
 import React, { Component, PropTypes} from 'react';
 import {
   View,
-  TextInput,
+  Text,
   StyleSheet,
   Image
 } from 'react-native';
 
 import constVar from 'const/constant';
 
-export default class InputFieldComponent extends Component {
+export default class CustomViewInfoComponent extends Component {
   render() {
     return (
         <View style={styles.container}>
           <Image source={this.props.imageIcon} style={styles.image} resizeMode={Image.resizeMode.contain}/>
-          <TextInput 
-          {...this.props}
-          style={styles.inputField}
-          underlineColorAndroid='transparent'
-          />
+          <View style={{flex: 5, height: 50, justifyContent: 'center'}}>
+            <Text {...this.props} style={styles.info}>{this.props.displayInfo}</Text>
+          </View>
         </View>
     );
   }
 }
 
-InputFieldComponent.propTypes = {
+CustomViewInfoComponent.propTypes = {
   imageIcon: PropTypes.number.isRequired,
-  secureTextEntry: PropTypes.bool,
-  placeholder: PropTypes.string,
-  placeholderTextColor: PropTypes.string
+  displayInfo: PropTypes.string.isRequired
 };
 
 const styles = StyleSheet.create({
@@ -43,8 +39,9 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 20,
   },
-  inputField: {
-    flex: 5,
-    height: 50
+  info: {
+    backgroundColor: 'transparent',
+    fontSize: 20,
+    color: constVar.colors.WHITE
   }
 });

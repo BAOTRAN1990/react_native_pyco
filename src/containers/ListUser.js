@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 8
   },
   row: {
-    backgroundColor: '#F6F6F6', 
+    backgroundColor: constVar.colors.WHITE, 
     padding: 7,
     flexDirection: 'row'
   },

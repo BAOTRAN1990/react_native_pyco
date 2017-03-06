@@ -14,10 +14,10 @@ export default class InputFieldComponent extends Component {
         <View style={styles.container}>
           <Image source={this.props.imageIcon} style={styles.image} resizeMode={Image.resizeMode.contain}/>
           <TextInput
-          autoCapitalize='none'
-          autoCorrect={false}
-          {...this.props}
-          style={styles.inputField}
+            autoCapitalize='none'
+            autoCorrect={false}
+            {...this.props}
+            style={styles.inputField}
           />
         </View>
     );
@@ -33,7 +33,6 @@ InputFieldComponent.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
     flexDirection: 'row',
     height: 50,
     alignItems: 'center',
@@ -47,6 +46,7 @@ const styles = StyleSheet.create({
   },
   inputField: {
     flex: 5,
-    height: 50
+    height: 50,
+    color: constVar.colors.WHITE
   }
 });
