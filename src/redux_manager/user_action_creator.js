@@ -34,7 +34,7 @@ export default function addUserAsync(userInfo){
                 'Message',
                 'Signed up successfully!!! Please sign in again.',
                 [
-                    {text: 'OK', onPress: () => Actions.signIn()},
+                    {text: 'OK', onPress: () => Actions.pop()},
                 ]
             );
         }, 2000);
