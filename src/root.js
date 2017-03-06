@@ -15,7 +15,7 @@ export default class RootComponent extends Component {
           <Scene key="root">
             <Scene key="signIn" component={SignIn} title="Sign In" initial={true} hideNavBar={true}/>
             <Scene key="signUp" component={SignUp} hideNavBar={false} navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}}/>
-            <Scene key="listUser" component={ListUser} hideNavBar={false} navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}}/>
+            <Scene key="listUser" component={ListUser} hideNavBar={false} navigationBarStyle={{backgroundColor: 'transparent', borderBottomWidth: 0}} hideNavBar={true}/>
           </Scene>
         </Router>
       </Provider>

@@ -23,24 +23,46 @@ class ListUser extends Component {
     };
   }
 
+  _renderRow(rowData, sectionID, rowID, highlightRow){
+    return (
+      <TouchableHighlight onPress={() => {
+          //this._pressRow(rowID);
+          highlightRow(sectionID, rowID);
+        }}>
+          <View style={{backgroundColor: '#F6F6F6', padding: 7}}>
+            <Text style={{fontSize: 20, color: '#696969'}}>{rowData.userName}</Text>
+            <Text style={{fontSize: 15, color: '#696969'}}>Birthday: {rowData.birthday}</Text>
+            <Text style={{fontSize: 15, color: '#696969'}}>Email: {rowData.email}</Text>
+          </View>
+      </TouchableHighlight>
+    );
+  }
+
+  _renderSeparator(sectionID, rowID, adjacentRowHighlighted){
+    return (
+      <View
+        key={`${sectionID}-${rowID}`}
+        style={{
+          height: adjacentRowHighlighted ? 4 : 1,
+          backgroundColor: adjacentRowHighlighted ? '#3B5998' : '#CCCCCC',
+        }}
+      />
+    );
+  }
+
   render() {
-    // if(this.props.userInfo) {
-    //   //Actions.signUp(this.props.userInfo.full_name);
-    //   Alert.alert('Welcome notice from sign up scene', `Welcome user ${this.props.userInfo.full_name}`);
-    // } else {
-    //   Alert.alert('Welcome notice from sign up scene', `Welcome anonymous`);
-    // }
     return (
         <Image source={require('assets/images/bg_signin.png')} style={styles.bg_image} resizeMode={Image.resizeMode.cover}>
           <View style={styles.title_container}>
             <Text style={styles.title}>
-              List user
+              List users
             </Text>
           </View>
           <View style={styles.form_container}>
             <ListView
               dataSource={this.state.dataSource}
-              renderRow={(userData) => <Text>{userData.userName}</Text>}
+              renderRow={this._renderRow}
+              renderSeparator={this._renderSeparator}
             />
           </View>
         </Image>
@@ -56,16 +78,16 @@ const styles = StyleSheet.create({
   },
   title_container: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
   title: {
-    fontSize: 40,
+    fontSize: 30,
     color: constVar.colors.WHITE,
-    paddingLeft: 20,
+    //paddingLeft: 20,
     backgroundColor: 'transparent'
   },
   form_container: {
-    flex: 4
+    flex: 8
   }
 });
 
