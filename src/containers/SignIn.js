@@ -28,7 +28,7 @@ class SignIn extends Component {
   }
 
   handleSignIn(){
-    this.props.login({username: this.state.userName, password: this.state.password});
+    this.props.login({userName: this.state.userName, password: this.state.password});
   }
 
   render() {

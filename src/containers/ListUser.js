@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 
 import InputFieldComponent from 'components/CustomInputField'
 import constVar from 'const/constant'
-import {viewUserDtlAsync} from 'redux_manager/user_action_creator'
+import {viewUserDtlAsync, getListUserAsync} from 'redux_manager/user_action_creator'
 
 class ListUser extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class ListUser extends Component {
     return (
       <TouchableHighlight onPress={() => {
         highlightRow(sectionID, rowID);
-        this.pressUserHandler(sectionID, rowID, rowData.userID);
+        this.pressUserHandler(sectionID, rowID, rowData._id);
       }}>
           <View style={styles.row}>
             <View style={styles.row_icon}>
@@ -126,7 +126,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    viewUserInfo: (userID) => dispatch(viewUserDtlAsync(userID))
+    viewUserInfo: (userID) => dispatch(viewUserDtlAsync(userID)),
+    getListUser: () => dispatch(getListUserAsync())
   }
 }
 

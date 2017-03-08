@@ -1,6 +1,8 @@
 import { Actions } from 'react-native-router-flux';
 
 import {startLoading, stopLoading} from 'redux_manager/common_action_creator';
+import APIServices from 'network_call/ApiServices'
+import {getListUserAsync} from 'redux_manager/user_action_creator'
 
 // Action types
 export const SUCCESS = 'Success';
@@ -26,18 +28,14 @@ export function logInRequestSuccess(data){
 export default function logInAsync(userCredentials){
     return dispatch => {
         dispatch(startLoading());
-        if (userCredentials.username === 'test' && userCredentials.password === '123') {
-            setTimeout(() => {
-                dispatch(logInRequestSuccess(userInfo));
-                dispatch(stopLoading());
-                Actions.listUser();
-            }, 2000);
-        } else {
-            setTimeout(() => {
-                dispatch(logInRequestFailed({message: 'Invalid username and password.'}));
-                dispatch(stopLoading());
-            }, 2000);
-        }
+        APIServices.signIn(userCredentials).then(userInfo => {
+            dispatch(logInRequestSuccess(userInfo));
+            dispatch(stopLoading());
+            dispatch(getListUserAsync());
+        }).catch(err => {
+            dispatch(logInRequestFailed({message: err.message}));
+            dispatch(stopLoading());
+        });
     }
 }
 

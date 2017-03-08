@@ -1,4 +1,4 @@
-import {ADD_USER, VIEW_USER} from './user_action_creator';
+import {ADD_USER, VIEW_USER, SAVE_LIST_USERS} from './user_action_creator';
 
 var userID = 0;
 
@@ -22,7 +22,12 @@ export default (state = {userList: [], chosenUser: {}}, action) => {
             return {
                 userList: state.userList,
                 chosenUser: userInfo
-            }
+            };
+        case SAVE_LIST_USERS:
+            return {
+                userList: action.payload,
+                chosenUser: state.chosenUser
+            };
         default:
             return state;
     }
