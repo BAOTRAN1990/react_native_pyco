@@ -1,20 +1,32 @@
 const BASE_URL = 'http://localhost:3000';
 const headers = {
-    'Content-Type': 'application/json',
-    'charset': 'utf-8'
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
 }
 
 export default class APIServices {
     static signIn(userCredential){
         let signInURL = `${BASE_URL}/signin`;
-        return fetch(signInURL, {
+        return fetch('http://localhost:3000/signin', {
             method: 'POST',
-            headers: headers,
-            body: JSON.stringify(userCredential)
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: userCredential.userName,
+                password: userCredential.password,
+            })
         }).then(response => {
-            //console.log(response.ok);
             return response.json();
-        })
+        }).then(jsonData => {
+            console.log(jsonData);
+            if(jsonData.hasOwnProperty('error')){
+                throw new Error(jsonData.error);
+            } else {
+                return jsonData;
+            }
+        });
     }
 
     static getListUser(){
