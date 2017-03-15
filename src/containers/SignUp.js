@@ -13,7 +13,7 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
 import InputFieldComponent from 'components/CustomInputField'
-import addUser from 'redux_manager/user_action_creator'
+import addUserAsync from 'redux_manager/user_action_creator'
 import constVar from 'const/constant'
 
 class SignUp extends Component {
@@ -98,6 +98,9 @@ class SignUp extends Component {
             />
           </View>
           <View style={styles.bottom_container}>
+            <View style={styles.error_container}>
+                <Text style={{backgroundColor: 'transparent', color: 'red'}}>{this.props.errorMsg}</Text>
+            </View>
             <View style={styles.join_button_container}>
               {dynaJoinButton}
             </View>
@@ -135,6 +138,10 @@ const styles = StyleSheet.create({
   bottom_container: {
     flex: 2
   },
+  error_container: {
+    flex: 1,
+    alignItems: 'center'
+  },
   join_button_container: {
     flex: 1,
     flexDirection: 'row',
@@ -158,14 +165,15 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     //userInfo: state.UserReducer.userList,
-    loading: state.CommonReducer.loading
+    loading: state.CommonReducer.loading,
+    errorMsg: state.UserReducer.error
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addUser: (userInfo) => {
-      dispatch(addUser(userInfo))
+      dispatch(addUserAsync(userInfo))
     }
   }
 }

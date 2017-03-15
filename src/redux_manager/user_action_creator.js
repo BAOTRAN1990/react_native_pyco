@@ -8,29 +8,28 @@ import {startLoading, stopLoading} from 'redux_manager/common_action_creator';
 import APIServices from 'network_call/ApiServices';
 
 // action types
-export const ADD_USER = 'add_user';
+export const ADD_USER_FAILED = 'add_user_failed';
 export const VIEW_USER = 'view_user';
 export const SAVE_LIST_USERS = 'save_list_users';
 
-function addUser(userInfo){
+function addUserFailed(error){
     return {
-        type: ADD_USER,
-        payload: userInfo
+        type: ADD_USER_FAILED,
+        error: error.message
     }
 }
 
-function viewUserDtl(userID){
+function viewUserDtl(user){
     return {
         type: VIEW_USER,
-        payload: userID
+        payload: user
     }
 }
 
 export default function addUserAsync(userInfo){
     return dispatch => {
         dispatch(startLoading());
-        setTimeout(() => {
-            dispatch(addUser(userInfo));
+        APIServices.addUser(userInfo).then(result => {
             dispatch(stopLoading());
             Alert.alert(
                 'Message',
@@ -39,13 +38,19 @@ export default function addUserAsync(userInfo){
                     {text: 'OK', onPress: () => Actions.pop()},
                 ]
             );
-        }, 2000);
+        }).catch(err => {
+            dispatch(addUserFailed({message: err.message}));
+            dispatch(stopLoading());
+        });
     };
 }
 
 export function viewUserDtlAsync(userID){
     return dispatch => {
-        dispatch(viewUserDtl(userID));
+        APIServices.getUserDtl(userID).then(user => {
+            dispatch(viewUserDtl(user));
+            Actions.userDtl();
+        });
     }
 }
 

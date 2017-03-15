@@ -7,12 +7,9 @@ const headers = {
 export default class APIServices {
     static signIn(userCredential){
         let signInURL = `${BASE_URL}/signin`;
-        return fetch('http://localhost:3000/signin', {
+        return fetch(signInURL, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: headers,
             body: JSON.stringify({
                 email: userCredential.userName,
                 password: userCredential.password,
@@ -20,7 +17,7 @@ export default class APIServices {
         }).then(response => {
             return response.json();
         }).then(jsonData => {
-            console.log(jsonData);
+            //console.log(jsonData);
             if(jsonData.hasOwnProperty('error')){
                 throw new Error(jsonData.error);
             } else {
@@ -39,6 +36,41 @@ export default class APIServices {
             return response.json();
         }).then(jsonData => {
             return jsonData.listUsers;
+        });
+    }
+
+    static getUserDtl(userID){
+        let getUserDtlURL = `${BASE_URL}/user/${userID}`;
+        return fetch(getUserDtlURL, {
+            method: 'GET',
+            headers: headers
+        }).then(response => {
+            return response.json();
+        }).then(jsonData => {
+            //console.log(jsonData);
+            if(jsonData.hasOwnProperty('error')){
+                throw new Error(jsonData.error);
+            } else {
+                return jsonData;
+            }
+        });
+    }
+
+    static addUser(userInfo){
+        let signInURL = `${BASE_URL}/user`;
+        return fetch(signInURL, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(userInfo)
+        }).then(response => {
+            return response.json();
+        }).then(jsonData => {
+            //console.log(jsonData);
+            if(jsonData.hasOwnProperty('error')){
+                throw new Error(jsonData.error);
+            } else {
+                return jsonData;
+            }
         });
     }
 }

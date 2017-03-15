@@ -29,7 +29,6 @@ class ListUser extends Component {
 
   pressUserHandler(sectionID, rowID, userID){
     this.props.viewUserInfo(userID);
-    Actions.userDtl();
   }
 
   _renderRow(rowData, sectionID, rowID, highlightRow){

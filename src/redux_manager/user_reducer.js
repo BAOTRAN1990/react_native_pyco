@@ -1,30 +1,23 @@
-import {ADD_USER, VIEW_USER, SAVE_LIST_USERS} from './user_action_creator';
+import {ADD_USER_FAILED, VIEW_USER, SAVE_LIST_USERS} from './user_action_creator';
 
 var userID = 0;
 
-export default (state = {userList: [], chosenUser: {}}, action) => {
+export default (state = {userList: [], chosenUser: {}, error: ''}, action) => {
     switch (action.type){
-        case ADD_USER:
-            userID++;
-            let user = {...action.payload, userID};
+        case ADD_USER_FAILED:
             return {
-                userList: [
-                    ...state.userList,
-                    user
-                ]
+                ...state,
+                error: action.error
             };
         case VIEW_USER:
-            let userInfo = state.userList.find((user) => {
-                if (user.userID === action.payload){
-                    return user;
-                }
-            });
             return {
+                error: '',
                 userList: state.userList,
-                chosenUser: userInfo
+                chosenUser: action.payload
             };
         case SAVE_LIST_USERS:
             return {
+                error: '',
                 userList: action.payload,
                 chosenUser: state.chosenUser
             };

@@ -8,15 +8,6 @@ import {getListUserAsync} from 'redux_manager/user_action_creator'
 export const SUCCESS = 'Success';
 export const FAILED = 'Failed';
 
-// sample user info
-const userInfo = {
-	trainee_id: 1,
-	full_name: 'test',
-	email: 'test@gmail.com',
-	birthday: '1986-01-20',
-	token: 'abcxyzwendsjkfjdsklfjkds'
-};
-
 // Action Creators
 export function logInRequestSuccess(data){
     return {
